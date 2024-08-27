@@ -1,0 +1,20 @@
+/* Estilo para o título principal */
+h1 {
+    font-size: 30px;
+    font-family: Arial, sans-serif;
+    color: blue;
+}
+
+/* Estilo para os títulos secundários */
+h2 {
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    color: red;
+}
+
+/* Estilo para os parágrafos */
+p {
+    font-size: 15px;
+    font-family: "Times New Roman", Times, serif;
+    color: black;
+}

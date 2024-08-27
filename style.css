@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principais Comandos para Criar um Site</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Título Principal: Comandos Essenciais</h1>
+
+    <h2>Título Secundário: Estrutura HTML</h2>
+    <p>A estrutura básica de um site começa com a criação de um arquivo HTML. A seguir estão alguns comandos essenciais:</p>
+
+    <h2>Título Secundário: Formatação com CSS</h2>
+    <p>O CSS (Cascading Style Sheets) é utilizado para estilizar o conteúdo do HTML. Abaixo, explicamos como aplicá-lo:</p>
+
+    <img src="imagem-exemplo-html.png" alt="Exemplo de código HTML">
+    <img src="imagem-exemplo-css.png" alt="Exemplo de código CSS">
+</body>
+</html>

@@ -7,12 +7,14 @@ body {
     background: linear-gradient(135deg, #FFC371 0%, #FF5F6D 100%);
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    /* align-items: center;  Removido para permitir rolagem */
+    min-height: 100vh; /* Mantido para garantir que o corpo preencha a tela */
     margin: 0;
     color: #333;
-    overflow: hidden;
+    overflow-x: hidden; /* Evita rolagem horizontal indesejada */
     position: relative;
+    padding-top: 50px; /* Adicionado um padding para o topo */
+    padding-bottom: 50px; /* Adicionado um padding para o rodapé */
 }
 
 body::before {
@@ -69,6 +71,8 @@ body::after {
     animation: fadeIn 1s ease-out;
     position: relative;
     z-index: 1;
+    margin-top: 50px; /* Garante que não fique colado no topo */
+    margin-bottom: 50px; /* Garante que não fique colado no rodapé */
 }
 
 @keyframes fadeIn {
@@ -178,9 +182,9 @@ button:active {
 
 .results-visible {
     opacity: 1;
-    max-height: 100px; /* Adjust based on content height */
+    max-height: 200px; /* Ajustado para acomodar mais texto e evitar corte */
     margin-top: 25px;
-    padding-top: 15px;
+    padding: 15px; /* Ajustado para ter padding em todos os lados */
     background-color: #eafaea; /* Light green for results */
     border: 1px solid #c8e6c9;
     border-radius: 10px;
@@ -196,11 +200,24 @@ button:active {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Cores de feedback para as respostas */
+.answers label[style*="background-color: rgb(212, 237, 218)"] { /* Light green for correct selected */
+    border-color: #c3e6cb;
+}
+
+.answers label[style*="background-color: rgb(248, 215, 218)"] { /* Light red for incorrect selected */
+    border-color: #f5c6cb;
+}
+
+.answers label[style*="background-color: rgb(204, 229, 255)"] { /* Light blue to highlight correct if user got wrong */
+    border-color: #b8daff;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .quiz-container {
         padding: 30px;
-        margin: 20px;
+        margin: 20px auto; /* Centraliza e adiciona margem */
     }
 
     h1 {
@@ -226,6 +243,7 @@ button:active {
 @media (max-width: 480px) {
     .quiz-container {
         padding: 20px;
+        margin: 15px auto;
     }
 
     h1 {

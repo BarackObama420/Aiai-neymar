@@ -1,21 +1,123 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Principais Comandos para Criar um Site</title>
+    <title>Quiz: Passo Bem Solto - ATLS</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Título Principal: Comandos Essenciais</h1>
+    <div class="quiz-container">
+        <h1>Quiz: Passo Bem Solto - ATLS</h1>
+        <div id="quiz"></div>
+        <button id="submit">Ver Resultado</button>
+        <div id="results" class="results-hidden"></div>
+    </div>
 
-    <h2>Título Secundário: Estrutura HTML</h2>
-    <p>A estrutura básica de um site começa com a criação de um arquivo HTML. A seguir estão alguns comandos essenciais:</p>
+    <script>
+        const quizQuestions = [
+            {
+                question: "Qual o principal sentimento transmitido pela batida e melodia de 'Passo Bem Solto'?",
+                answers: {
+                    a: "Tristeza e melancolia",
+                    b: "Euforia e liberdade",
+                    c: "Mistério e suspense",
+                    d: "Raiva e frustração"
+                },
+                correctAnswer: "b"
+            },
+            {
+                question: "A letra da música faz referência a qual tipo de cenário ou ambiente predominantemente?",
+                answers: {
+                    a: "Um dia chuvoso na cidade",
+                    b: "Uma festa agitada na balada",
+                    c: "Um pôr do sol na praia ou um dia de verão",
+                    d: "Uma noite fria e solitária"
+                },
+                correctAnswer: "c"
+            },
+            {
+                question: "Qual elemento sonoro se destaca e contribui para a vibe 'chill' da música?",
+                answers: {
+                    a: "Guitarras elétricas distorcidas",
+                    b: "Sintetizadores vibrantes e pads suaves",
+                    c: "Instrumentos de orquestra clássica",
+                    d: "Bateria com ritmo pesado de rock"
+                },
+                correctAnswer: "b"
+            },
+            {
+                question: "A música 'Passo Bem Solto' é frequentemente associada a qual gênero musical?",
+                answers: {
+                    a: "Heavy Metal",
+                    b: "Sertanejo Universitário",
+                    c: "Indie Pop / Lo-fi Pop",
+                    d: "Funk Carioca"
+                },
+                correctAnswer: "c"
+            },
+            {
+                question: "Qual a sensação geral que a música busca inspirar no ouvinte, conforme seu título sugere?",
+                answers: {
+                    a: "Tensão e apreensão",
+                    b: "Relaxamento e leveza",
+                    c: "Pressa e agitação",
+                    d: "Profunda reflexão sobre a vida"
+                },
+                correctAnswer: "b"
+            }
+        ];
 
-    <h2>Título Secundário: Formatação com CSS</h2>
-    <p>O CSS (Cascading Style Sheets) é utilizado para estilizar o conteúdo do HTML. Abaixo, explicamos como aplicá-lo:</p>
+        const quizDiv = document.getElementById('quiz');
+        const resultsDiv = document.getElementById('results');
+        const submitButton = document.getElementById('submit');
 
-    <img src="https://miro.medium.com/v2/resize:fit:1400/1*no1gc4lhW0YKOr6zHJS2ew.png" alt="Exemplo de código HTML">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX5GpVEX8bfRFesy76RNz7jiRkvy0a3KbttLe_-RLkf7ZfuJMXqdtVuN0&s=10" alt="Exemplo de código CSS">
+        function buildQuiz() {
+            const output = [];
+            quizQuestions.forEach((currentQuestion, questionNumber) => {
+                const answers = [];
+                for (letter in currentQuestion.answers) {
+                    answers.push(
+                        `<label>
+                            <input type="radio" name="question${questionNumber}" value="${letter}">
+                            ${letter.toUpperCase()}:
+                            ${currentQuestion.answers[letter]}
+                        </label>`
+                    );
+                }
+                output.push(
+                    `<div class="question"> ${currentQuestion.question} </div>
+                    <div class="answers"> ${answers.join('')} </div>`
+                );
+            });
+            quizDiv.innerHTML = output.join('');
+        }
+
+        function showResults() {
+            const answerContainers = quizDiv.querySelectorAll('.answers');
+            let numCorrect = 0;
+
+            quizQuestions.forEach((currentQuestion, questionNumber) => {
+                const answerContainer = answerContainers[questionNumber];
+                const selector = `input[name=question${questionNumber}]:checked`;
+                const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+
+                if (userAnswer === currentQuestion.correctAnswer) {
+                    numCorrect++;
+                    answerContainers[questionNumber].style.color = '#5cb85c'; // Green for correct
+                } else {
+                    answerContainers[questionNumber].style.color = '#d9534f'; // Red for incorrect
+                }
+            });
+
+            resultsDiv.innerHTML = `<p>Você acertou ${numCorrect} de ${quizQuestions.length} perguntas!</p>`;
+            resultsDiv.classList.remove('results-hidden');
+            resultsDiv.classList.add('results-visible');
+        }
+
+        buildQuiz();
+        submitButton.addEventListener('click', showResults);
+    </script>
 </body>
 </html>
